@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Agenda Semanal - EvalTrackPlus{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="/dashboard" class="text-2xl font-bold text-blue-600">EvalTrackPlus</a>
+                    <span class="text-gray-400">|</span>
+                    <span class="text-gray-700 font-medium">Agenda Semanal</span>
+                </div>
+                <div class="flex items-center">
+                    <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                        Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="mb-6 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-gray-800">Mi Agenda Semanal</h1>
+            <button onclick="openAddModal()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                <i class="fas fa-plus mr-2"></i>Agregar Actividad
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4" id="agendaGrid">
+        </div>
+    </div>
+</div>
+
+<div id="activityModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md">
+        <h2 id="modalTitle" class="text-2xl font-bold text-gray-800 mb-4">Agregar Actividad</h2>
+        <form id="activityForm" class="space-y-4">
+            <input type="hidden" id="activityId">
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Día</label>
+                <select id="dayOfWeek" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="Lunes">Lunes</option>
+                    <option value="Martes">Martes</option>
+                    <option value="Miércoles">Miércoles</option>
+                    <option value="Jueves">Jueves</option>
+                    <option value="Viernes">Viernes</option>
+                </select>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Hora Inicio</label>
+                    <input type="time" id="timeStart" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Hora Fin</label>
+                    <input type="time" id="timeEnd" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Actividad</label>
+                <input type="text" id="activity" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">Materia (opcional)</label>
+                <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex space-x-4">
+                <button type="submit" class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                    Guardar
+                </button>
+                <button type="button" onclick="closeModal()" class="flex-1 bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600 transition">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/static/js/agenda.js"></script>
+{% endblock %}
